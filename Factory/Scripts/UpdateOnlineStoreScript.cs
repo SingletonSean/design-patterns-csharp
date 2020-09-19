@@ -7,13 +7,11 @@ namespace Factory.Scripts
 {
     public class UpdateOnlineStoreScript
     {
-        private readonly IPaymentService _paymentService;
-        private readonly IShippingService _shippingService;
+        private readonly IOnlineStoreFactory _onlineStoreFactory;
 
-        public UpdateOnlineStoreScript(IPaymentService paymentService, IShippingService shippingService)
+        public UpdateOnlineStoreScript(IOnlineStoreFactory onlineStoreFactory)
         {
-            _paymentService = paymentService;
-            _shippingService = shippingService;
+            _onlineStoreFactory = onlineStoreFactory;
         }
 
         public IOnlineStore Run()
@@ -21,7 +19,7 @@ namespace Factory.Scripts
             Console.Write("Enter your updated online store's name: ");
             string storeName = Console.ReadLine();
 
-            IOnlineStore store = new BasicOnlineStore(storeName, _paymentService, _shippingService);
+            IOnlineStore store = _onlineStoreFactory.CreateOnlineStore(storeName);
 
             return store;
         }
