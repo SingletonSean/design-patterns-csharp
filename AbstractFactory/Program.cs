@@ -6,9 +6,12 @@ namespace AbstractFactory
 {
     class Program
     {
+        private const string FILE_NAME = "products.json";
+
         static void Main(string[] args)
         {
-            ProductService productService = new ProductService();
+            IProductCommunicatorAbstractFactory productCommunicatorAbstractFactory = new InMemoryProductCommunicatorAbstractFactory();
+            ProductService productService = new ProductService(productCommunicatorAbstractFactory);
 
             // Get product.
             try

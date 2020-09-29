@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace AbstractFactory.Services.ProductReaders
 {
-    public class FileProductReader : IDisposable
+    public class FileProductReader : IDisposable, IProductReader
     {
         private readonly ICollection<Product> _products;
 
@@ -17,8 +17,8 @@ namespace AbstractFactory.Services.ProductReaders
 
         public FileProductReader(string fileName)
         {
-            try 
-            { 
+            try
+            {
                 string productsJson = File.ReadAllText(fileName);
                 _products = JsonSerializer.Deserialize<ICollection<Product>>(productsJson);
             }
@@ -30,7 +30,7 @@ namespace AbstractFactory.Services.ProductReaders
 
         public Product GetById(Guid id)
         {
-            if(_disposed)
+            if (_disposed)
             {
                 throw new Exception("Object is disposed.");
             }
@@ -38,7 +38,7 @@ namespace AbstractFactory.Services.ProductReaders
             Product product = _products.FirstOrDefault(p => p.Id == id);
 
             bool productNotFound = product == null;
-            if(productNotFound)
+            if (productNotFound)
             {
                 throw new Exception("Product not found.");
             }

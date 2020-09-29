@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace AbstractFactory.Services.ProductWriters
 {
-    public class FileProductWriter : IDisposable
+    public class FileProductWriter : IDisposable, IProductWriter
     {
         private readonly ICollection<Product> _products;
 

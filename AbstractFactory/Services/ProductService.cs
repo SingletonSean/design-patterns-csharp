@@ -9,11 +9,16 @@ namespace AbstractFactory.Services
 {
     public class ProductService
     {
-        private const string FILE_NAME = "products.json";
+        private readonly IProductCommunicatorAbstractFactory _productCommunicatorAbstractFactory;
+
+        public ProductService(IProductCommunicatorAbstractFactory productCommunicatorAbstractFactory)
+        {
+            _productCommunicatorAbstractFactory = productCommunicatorAbstractFactory;
+        }
 
         public Product GetById(Guid id)
         {
-            using (FileProductReader reader = new FileProductReader(FILE_NAME))
+            using (IProductReader reader = _productCommunicatorAbstractFactory.CreateProductReader())
             {
                 return reader.GetById(id);
             }
@@ -21,7 +26,7 @@ namespace AbstractFactory.Services
 
         public Product Save(Product product)
         {
-            using (FileProductWriter writer = new FileProductWriter(FILE_NAME))
+            using (IProductWriter writer = _productCommunicatorAbstractFactory.CreateProductWriter())
             {
                 return writer.Save(product);
             }
