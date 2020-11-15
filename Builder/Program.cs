@@ -9,7 +9,10 @@ namespace Builder
     {
         static void Main(string[] args)
         {
-            IFormSubmitter formSubmitter = new ReceiptFormSubmitter(new FormSubmitter(new FormValidator()));
+            IFormSubmitter formSubmitter = new FormSubmitterBuilder()
+                .SkipValidation()
+                .WithReceipt()
+                .Build();
 
             Form userForm = PromptUser();
 
