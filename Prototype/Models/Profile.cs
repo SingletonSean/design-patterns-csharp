@@ -13,9 +13,23 @@ namespace Prototype.Models
         public string Email { get; set; }
         public int Age => CalculateAge();
 
-        public bool IsPrivate => _settings.IsPrivate;
-        public bool HideEmail => _settings.HideEmail;
-        public bool HideAge => _settings.HideAge;
+        public bool IsPrivate
+        {
+            get => _settings.IsPrivate;
+            set => _settings.IsPrivate = value;
+        }
+
+        public bool HideEmail
+        {
+            get => _settings.HideEmail;
+            set => _settings.HideEmail = value;
+        }
+
+        public bool HideAge
+        {
+            get => _settings.HideAge;
+            set => _settings.HideAge = value;
+        }
 
         public Profile()
         {
