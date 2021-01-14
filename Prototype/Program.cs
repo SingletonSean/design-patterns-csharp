@@ -29,7 +29,7 @@ namespace Prototype
             Console.WriteLine("Edit Profile");
             Console.WriteLine("------------");
 
-            Profile editProfile = profile;
+            Profile editProfile = profile.Clone();
 
             Console.Write("Name: ");
             editProfile.Name = Console.ReadLine();
@@ -72,6 +72,21 @@ namespace Prototype
             Console.ReadKey();
 
             // Create profile from prototype.
+            ProfileSettings defaultSettingsPrototype = new ProfileSettings()
+            {
+                IsPrivate = false,
+                HideAge = true,
+                HideEmail = true
+            };
+            ProfileSettings secureSettingsPrototype = new ProfileSettings()
+            {
+                IsPrivate = true,
+                HideAge = true,
+                HideEmail = true
+            };
+            ProfileSettingsPrototypeRegistry settingsPrototypeRegistry = new ProfileSettingsPrototypeRegistry(
+                defaultSettingsPrototype, secureSettingsPrototype);
+
             Console.Write("\n\n\n");
             Console.WriteLine("Create Profile");
             Console.WriteLine("------------");
@@ -89,9 +104,11 @@ namespace Prototype
             {
                 case "1":
                     // Get default settings prototype.
+                    newProfile.SetSettings(settingsPrototypeRegistry.CreateDefaultProfileSettings());
                     break;
                 case "2":
                     // Get secure settings prototype.
+                    newProfile.SetSettings(settingsPrototypeRegistry.CreateSecureProfileSettings());
                     break;
                 default:
                     Console.Write("Private Profile (1 = yes): ");

@@ -51,5 +51,16 @@ namespace Prototype.Models
             double ageInDays = TimeSpan.FromTicks(DateTime.Now.Ticks).TotalDays - TimeSpan.FromTicks(_dateOfBirth.Ticks).TotalDays;
             return (int)ageInDays / 365;
         }
+
+        public Profile Clone()
+        {
+            return new Profile()
+            {
+                Email = Email,
+                Name = Name,
+                _dateOfBirth = _dateOfBirth,
+                _settings = _settings.Clone()
+            };
+        }
     }
 }
