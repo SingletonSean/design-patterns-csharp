@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Composite.Models
 {
-    public class AudioTimeline
+    public class AudioTimeline : IAudioTimeline
     {
         private readonly List<TimeSpan> _cuts;
 
