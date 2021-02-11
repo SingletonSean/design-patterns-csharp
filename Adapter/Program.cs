@@ -1,5 +1,9 @@
 ﻿using Adapter.Models;
+using Adapter.Services;
+using Adapter.Services.FileWriters;
 using Adapter.Services.ProductRepositories;
+using Adapter.Services.ProductWriters;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -9,12 +13,16 @@ namespace Adapter
     {
         static async Task Main(string[] args)
         {
-            IProductRepository productRepository = new InMemoryProductRepository();
+            DbContextOptions options = new DbContextOptionsBuilder().UseInMemoryDatabase("products").Options;
+            ProductDbContext context = new ProductDbContext(options);
+            IProductRepository productRepository = new DatabaseProductRepository(context);
 
-            await Run(productRepository);
+            IProductWriter productWriter = new FileProductWriter(new FileWriter(), "products.txt");
+
+            await Run(productRepository, productWriter);
         }
 
-        private static async Task Run(IProductRepository productRepository)
+        private static async Task Run(IProductRepository productRepository, IProductWriter productWriter)
         {
             Product product = new Product()
             {
@@ -26,7 +34,7 @@ namespace Adapter
 
             Product savedProduct = await productRepository.GetById(product.Id);
 
-            Console.WriteLine($"{savedProduct.Name}: {savedProduct.Price:C}");
+            await productWriter.WriteProduct(savedProduct);
         }
     }
 }
