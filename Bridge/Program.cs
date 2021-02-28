@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Bridge.BookContentProviders;
+using Bridge.BookPublishers;
+using Bridge.Books;
+using System;
 
 namespace Bridge
 {
@@ -6,7 +9,12 @@ namespace Bridge
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IBookContentProvider contentProvider = new DesignPatternsBookContentProvider();
+            IBookPublisher publisher = new AudioBookPublisher();
+            Book book = new Book(contentProvider, publisher);
+            book.Publish();
+
+            Console.ReadKey();
         }
     }
 }
