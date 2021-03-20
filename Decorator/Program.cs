@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Decorator.Menus;
+using System;
+using System.Collections.Generic;
 
 namespace Decorator
 {
@@ -6,7 +8,17 @@ namespace Decorator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IMenu menu = new Menu(new List<IMenuItem>
+            {
+                new MenuItem("Chicken Sandwich", 6.99),
+                new MenuItem("Pizza", 3.99),
+                new MenuItem("Salad", 4.99),
+            });
+
+            foreach (IMenuItem item in menu.Items)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

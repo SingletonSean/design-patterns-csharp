@@ -4,11 +4,11 @@ namespace Decorator.Menus
 {
     public class Menu : IMenu
     {
-        public IEnumerable<IMenuItem> MenuItems { get; }
+        public IEnumerable<IMenuItem> Items { get; }
 
         public Menu(IEnumerable<IMenuItem> menuItems)
         {
-            MenuItems = menuItems;
+            Items = menuItems;
         }
     }
 }

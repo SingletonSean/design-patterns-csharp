@@ -4,6 +4,6 @@ namespace Decorator.Menus
 {
     public interface IMenu
     {
-        IEnumerable<IMenuItem> MenuItems { get; }
+        IEnumerable<IMenuItem> Items { get; }
     }
 }
