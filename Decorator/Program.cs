@@ -17,7 +17,8 @@ namespace Decorator
 
             IMenu menu = menuBuilder
                 .WithDiscounts(50)
-                .WithDailySpecial(new MenuItem("Milk", 0.99, true)).Build();
+                .WithDailySpecial(new MenuItem("Milk", 0.99, true))
+                .Build();
 
             foreach (IMenuItem item in menu.Items)
             {

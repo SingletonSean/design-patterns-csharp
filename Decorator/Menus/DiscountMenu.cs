@@ -20,7 +20,7 @@ namespace Decorator.Menus
 
         private IMenuItem ToDiscountMenuItems(IMenuItem menuItem)
         {
-            return new DiscountMenuItem(menuItem.Name, menuItem.Price, _discountPercentage, menuItem.IsSpecial);
+            return new DiscountMenuItem(menuItem, _discountPercentage);
         }
     }
 }
