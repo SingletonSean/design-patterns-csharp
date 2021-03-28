@@ -1,4 +1,5 @@
-﻿using Facade.Models;
+﻿using Facade.Exceptions;
+using Facade.Models;
 using Facade.Services;
 using Facade.Services.UserPreferencesRepositories;
 using Facade.Services.UserRepositories;
@@ -20,13 +21,22 @@ namespace Facade
 
             DatabaseUserRepository userRepository = new DatabaseUserRepository(context);
             FileUserPreferencesRepository userPreferencesRepository = new FileUserPreferencesRepository();
+            ProfileReaderFacade profileReader = new ProfileReaderFacade(userRepository, userPreferencesRepository);
 
-            await Run(userRepository, userPreferencesRepository);
+            await Run(profileReader);
         }
 
-        private static async Task Run(DatabaseUserRepository userRepository, FileUserPreferencesRepository userPreferencesRepository)
+        private static async Task Run(ProfileReaderFacade profileReader)
         {
-
+            try
+            {
+                Profile profile = await profileReader.GetByUsername("SingletonSean");
+                Console.WriteLine(profile);
+            }
+            catch (ForbiddenProfileReadException)
+            {
+                Console.WriteLine("Profile is private.");
+            }
         }
 
         private static async Task Seed(UsersDbContext context)
@@ -55,7 +65,7 @@ namespace Facade
 
             UserPreferences userPreferences = new UserPreferences()
             {
-                IsPrivate = true,
+                IsPrivate = false,
                 ColorTheme = ColorTheme.Dark
             };
             string userPreferencesJson = JsonSerializer.Serialize(userPreferences);
