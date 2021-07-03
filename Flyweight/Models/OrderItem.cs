@@ -12,18 +12,12 @@
 
     public class OrderItem
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ProductType Type { get; set; }
-        public double Price { get; set; }
+        public Product Product { get; set; }
         public double Quantity { get; set; }
 
-        public OrderItem(string name, string description, ProductType type, double price, double quantity)
+        public OrderItem(Product product, double quantity)
         {
-            Name = name;
-            Description = description;
-            Type = type;
-            Price = price;
+            Product = product;
             Quantity = quantity;
         }
     }

@@ -8,11 +8,12 @@ namespace Flyweight
     {
         private static Random _random = new Random();
 
-        private const int CPU_PURCHASE_COUNT = 1000000; // 1 million
+        private const int CPU_PURCHASE_COUNT = 10000000; // 1 million
 
         static void Main(string[] args)
         {
-            CpuOrderItemFactory cpuOrderItemFactory = new CpuOrderItemFactory();
+            CpuProductFlyweightFactory cpuProductFactory = new CpuProductFlyweightFactory();
+            CpuOrderItemFactory cpuOrderItemFactory = new CpuOrderItemFactory(cpuProductFactory);
 
             List<Order> orders = new List<Order>();
 
