@@ -10,7 +10,9 @@ namespace Proxy
     {
         static async Task Main(string[] args)
         {
-            while(true)
+            IBlogPostService blogPostService = new CachingBlogPostService(new ConsoleLoggingBlogPostService(new BlogPostService()));
+
+            while (true)
             {
                 Console.WriteLine("1: View Blog Posts");
                 Console.WriteLine("9: Exit");
@@ -20,7 +22,7 @@ namespace Proxy
 
                 if (key == ConsoleKey.D1)
                 {
-                    await ViewBlogPosts();
+                    await ViewBlogPosts(blogPostService);
                 }
                 else if(key == ConsoleKey.D9)
                 {
@@ -33,10 +35,8 @@ namespace Proxy
             }
         }
 
-        private static async Task ViewBlogPosts()
+        private static async Task ViewBlogPosts(IBlogPostService blogPostService)
         {
-            IBlogPostService blogPostService = new BlogPostService();
-            
             IEnumerable<BlogPost> blogPosts = await blogPostService.GetAll();
             Print(blogPosts);
         }
