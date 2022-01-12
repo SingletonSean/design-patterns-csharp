@@ -1,4 +1,5 @@
-﻿using Command.Models;
+﻿using Command.Commands;
+using Command.Models;
 using System;
 
 namespace Command
@@ -7,7 +8,18 @@ namespace Command
     {
         static void Main(string[] args)
         {
-            App app = new App();
+            Person person = new Person()
+            {
+                FirstName = "Singleton",
+                LastName = "Sean"
+            };
+            CommandHistory commandHistory = new CommandHistory();
+
+            App app = new App(
+                new ChangeFirstNameCommand(person, commandHistory),
+                new ChangeLastNameCommand(person, commandHistory),
+                new UndoCommand(commandHistory));
+
             app.Run();
         }
     }
