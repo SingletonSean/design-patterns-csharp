@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Strategy.Models.AvailableDashboardLocationStrategies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,14 @@ namespace Strategy.Models
         private readonly int[,] _dashboardItems;
         private readonly int _width;
         private readonly int _height;
+        private readonly IAvailableDashboardLocationStrategy _availableDashboardLocationStrategy;
 
-        public Dashboard(int width, int height)
+        public Dashboard(int width, int height, IAvailableDashboardLocationStrategy availableDashboardLocationStrategy)
         {
             _dashboardItems = new int[width, height];
             _width = width;
             _height = height;
+            _availableDashboardLocationStrategy = availableDashboardLocationStrategy;
         }
 
         public void AddItem(int value, DashboardLocation location)
@@ -28,7 +31,17 @@ namespace Strategy.Models
             if (value <= 0 || value >= 10 ) 
                 throw new ArgumentException("Value must be single digit number and greater than zero.", nameof(value));
 
-            _dashboardItems[location.X, location.Y] = value;
+            DashboardLocation? availableLocation = _availableDashboardLocationStrategy.Find(location, this);
+
+            if (availableLocation != null)
+            {
+                _dashboardItems[availableLocation.Value.X, availableLocation.Value.Y] = value;
+            }
+        }
+
+        public bool IsWithinBounds(int x, int y)
+        {
+            return x >= 0 && x < _width && y >= 0 && y < _height;
         }
 
         public bool HasItem(DashboardLocation location)
