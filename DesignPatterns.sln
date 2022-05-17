@@ -27,7 +27,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxy", "Proxy\Proxy.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Command", "Command\Command.csproj", "{B7C50CD6-4D5A-41F3-8496-28A4C63CAA42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy", "Strategy\Strategy.csproj", "{4A1C8F20-FCC0-49C1-A8E3-EAE68732140B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategy", "Strategy\Strategy.csproj", "{4A1C8F20-FCC0-49C1-A8E3-EAE68732140B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iterator", "Iterator\Iterator.csproj", "{FF6C8473-299C-4078-BEDA-D0B367459DB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0199E88D-C4D4-4BE8-9A58-C5AC3433724B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -195,6 +202,18 @@ Global
 		{4A1C8F20-FCC0-49C1-A8E3-EAE68732140B}.Release|x64.Build.0 = Release|Any CPU
 		{4A1C8F20-FCC0-49C1-A8E3-EAE68732140B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A1C8F20-FCC0-49C1-A8E3-EAE68732140B}.Release|x86.Build.0 = Release|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Debug|x64.Build.0 = Debug|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Debug|x86.Build.0 = Debug|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Release|x64.ActiveCfg = Release|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Release|x64.Build.0 = Release|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF6C8473-299C-4078-BEDA-D0B367459DB1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
