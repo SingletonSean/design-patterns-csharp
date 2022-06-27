@@ -2,27 +2,19 @@
 using ChainOfResponsibility.Services;
 using ChainOfResponsibility.Stores;
 
-namespace ChainOfResponsibility.Handlers.DisplayAllProducts
+namespace ChainOfResponsibility.Handlers.ListProducts
 {
-    public class ListProductsHandler
+    public class ListProductsHandler : IHandler
     {
         private readonly ProductRepository _productRepository;
-        private readonly AuthenticationStore _authenticationStore;
 
-        public ListProductsHandler(ProductRepository productRepository, AuthenticationStore authenticationStore)
+        public ListProductsHandler(ProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _authenticationStore = authenticationStore;
         }
 
         public void Handle(string[] args)
         {
-            if (!_authenticationStore.IsSignedIn)
-            {
-                Console.WriteLine("You must be signed in to view products.");
-                return;
-            }
-
             Console.WriteLine("Getting products...");
 
             IEnumerable<Product> products = _productRepository.GetAll();

@@ -4,25 +4,17 @@ using ChainOfResponsibility.Stores;
 
 namespace ChainOfResponsibility.Handlers.CreateProduct
 {
-    public class CreateProductHandler
+    public class CreateProductHandler : IHandler
     {
         private readonly ProductRepository _productRepository;
-        private readonly AuthenticationStore _authenticationStore;
 
-        public CreateProductHandler(ProductRepository productRepository, AuthenticationStore authenticationStore)
+        public CreateProductHandler(ProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _authenticationStore = authenticationStore;
         }
 
         public void Handle(string[] args)
         {
-            if(!_authenticationStore.IsSignedIn)
-            {
-                Console.WriteLine("You must be signed in to create a product.");
-                return;
-            }
-
             if(args.Length < 2)
             {
                 Console.WriteLine("Invalid parameters. Please provide a description and price.");

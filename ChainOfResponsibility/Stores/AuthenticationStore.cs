@@ -8,5 +8,9 @@
         {
             IsSignedIn = true;
         }
+        public void SignOut()
+        {
+            IsSignedIn = false;
+        }
     }
 }
