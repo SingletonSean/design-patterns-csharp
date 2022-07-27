@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Mediator.Scripts
 {
-    public class ListUsersScript : IDisposable
+    public class NewestUserScript : IDisposable
     {
         private readonly UserMediator _userMediator;
 
-        public ListUsersScript(UserMediator userMediator)
+        public User NewestUser { get; set; }
+
+        public NewestUserScript(UserMediator userMediator)
         {
             _userMediator = userMediator;
 
@@ -23,12 +25,9 @@ namespace Mediator.Scripts
         {
             Console.WriteLine();
 
-            Console.WriteLine("USERS");
-            foreach (User user in _userMediator.Users)
-            {
-                Console.WriteLine(user);
-            }
-            
+            Console.WriteLine("NEWEST USER");
+            Console.WriteLine(NewestUser);
+
             Console.WriteLine();
         }
 
@@ -39,6 +38,8 @@ namespace Mediator.Scripts
 
         private void UserMediator_UserCreated(User newUser)
         {
+            NewestUser = newUser;
+
             Run();
         }
     }

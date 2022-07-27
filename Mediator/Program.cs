@@ -1,7 +1,11 @@
-﻿using Mediator.Scripts;
+﻿using Mediator.Mediators;
+using Mediator.Scripts;
 
-ListUsersScript listUsersScript = new ListUsersScript();
-SignUpScript signUpScript = new SignUpScript(listUsersScript);
+UserMediator userMediator = new UserMediator();
+
+ListUsersScript listUsersScript = new ListUsersScript(userMediator);
+NewestUserScript newestUserScript = new NewestUserScript(userMediator);
+SignUpScript signUpScript = new SignUpScript(userMediator);
 
 bool hasExited = false;
 
@@ -29,3 +33,6 @@ do
             break;
     }
 } while (!hasExited);
+
+listUsersScript.Dispose();
+newestUserScript.Dispose();

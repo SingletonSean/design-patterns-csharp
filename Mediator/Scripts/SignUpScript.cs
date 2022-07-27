@@ -1,14 +1,15 @@
-﻿using Mediator.Models;
+﻿using Mediator.Mediators;
+using Mediator.Models;
 
 namespace Mediator.Scripts
 {
     public class SignUpScript
     {
-        private readonly ListUsersScript _listUsersScript;
+        private readonly UserMediator _userMediator;
 
-        public SignUpScript(ListUsersScript listUsersScript)
+        public SignUpScript(UserMediator userMediator)
         {
-            _listUsersScript = listUsersScript;
+            _userMediator = userMediator;
         }
 
         public void Run()
@@ -17,11 +18,9 @@ namespace Mediator.Scripts
             string email = Console.ReadLine()!;
 
             User newUser = new User(email);
-            _listUsersScript.AddUser(newUser);
+            _userMediator.Create(newUser);
 
             Console.WriteLine("Successfully signed up.");
-
-            _listUsersScript.Run();
         }
     }
 }
