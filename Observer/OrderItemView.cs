@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 
 namespace Observer
 {
-    public class OrderItemView
+    public class OrderItemView : IDisposable
     {
         private readonly OrderItemViewModel _viewModel;
 
@@ -15,6 +16,18 @@ namespace Observer
         {
             _viewModel = viewModel;
 
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
+
+            Print();
+        }
+
+        public void Dispose()
+        {
+            _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+        }
+
+        private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
             Print();
         }
 

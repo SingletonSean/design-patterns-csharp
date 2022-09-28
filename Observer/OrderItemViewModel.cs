@@ -1,8 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Observer
 {
-    public class OrderItemViewModel
+    public class OrderItemViewModel : INotifyPropertyChanged
     {
         public string Description { get; }
 
@@ -16,14 +17,13 @@ namespace Observer
             set
             {
                 _quantity = value;
-
-                View.Print();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
             }
         }
 
-        public OrderItemView View { get; set; }
-
         public ICommand IncreaseQuantityCommand { get; }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public OrderItemViewModel(string description)
         {
